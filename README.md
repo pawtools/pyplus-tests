@@ -4,13 +4,14 @@ DFPFK ~ pandas
 
 # Python+ Tests for replacing numpy operations
 
-Limited implementation for replacing `numpy` operations with a Python+ package
-that has identical module/method names and call signatures (i.e. `cupy`).
+Limited implementation for replacing `numpy` array operations with a Python+ package
+that has identical module/method names and call signatures (i.e. `cupy`). Dataframe
+operations added soon, see TODO.
 
 Execution scripts are in the top level for running tests of compute operations.
-When creating a new test, the first thing to do is to set the compute package 
+When creating a new test, the first thing to do is to set the array package 
 as desired. See the file `pcca_test.py` which processes some input options, 
-sets the compute package, and runs some operation where the source code has
+sets the array package, and runs some operation where the source code has
 been modified to use the runtime-selected package.
 
 ## Current:
@@ -24,7 +25,9 @@ folder (make new module if appropriate) and make these modifications:
 ```python
 # At top after your imports
 global ARRPKG
+global DFPKG
 ARRPKG = None
+DFPKG = None
 
 # Throughout the code
 #np.linalg.norm(X)
@@ -34,14 +37,17 @@ ARRPKG.dot(X)
 ```
 
 Then in your `test` file for this code, add this operation to let the
-compute package be set by an option at runtime:
+array package be set by an option at runtime:
 
 ```python
-from src import my_new_package
-from src.koopy_tools import set_compute_package
+from src import my_new_code
+from src.koopy_tools import set_array_package
+#from src.koopy_tools import set_df_package
 
-compute_package = "cupy" # or numpy
-set_compute_package(my_new_package, compute_package)
+array_package = "cupy" # or numpy
+#df_package = "cudf" # or pandas
+set_array_package(my_new_code, array_package)
+#set_df_package(my_new_code, df_package)
 ```
 
 To use small default test case
@@ -50,6 +56,6 @@ To use small default test case
 --or--
 
 To set up the execution configuration
-    `python pcca_test.py [compute_package] [input_file] [n_macrostates]`
+    `python pcca_test.py [array_package] [input_file] [n_macrostates]`
 
 
