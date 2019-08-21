@@ -10,8 +10,8 @@ logger = get_logger(__name__)
 
 __all__ = ["PCCA"]
 
-global CPT
-CPT = None
+global ARRPKG
+ARRPKG = None
 
 
 
@@ -81,16 +81,16 @@ def _pcca_connected_isa(evec, n_clusters):
     logger.info("_pcca_connected_isa function Gram-Schidt loop start")
     for k in range(1, n_clusters):
         max_dist = 0.0
-        temp = CPT.copy(ortho_sys[ind[k - 1]])
+        temp = ARRPKG.copy(ortho_sys[ind[k - 1]])
 
         # select next farthest point that is not yet a representative
         for (i, row) in enumerate(ortho_sys):
-            row -= CPT.dot(np.dot(temp, CPT.transpose(row)), temp)
-            distt = CPT.linalg.norm(row, 2)
+            row -= ARRPKG.dot(np.dot(temp, CPT.transpose(row)), temp)
+            distt = ARRPKG.linalg.norm(row, 2)
             if distt > max_dist and i not in ind[0:k]:
                 max_dist = distt
                 ind[k] = i
-        ortho_sys /= CPT.linalg.norm(ortho_sys[ind[k]], 2)
+        ortho_sys /= ARRPKG.linalg.norm(ortho_sys[ind[k]], 2)
 
     logger.info("_pcca_connected_isa function Gram-Schidt loop done")
 

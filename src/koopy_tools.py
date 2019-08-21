@@ -1,6 +1,6 @@
 
 
-def set_compute_package(module, package_name):
+def set_array_package(module, package_name):
     '''Set the package used for calculations
     before any actual work is run. The package must
     provide algebraic operations with functions
@@ -12,20 +12,20 @@ def set_compute_package(module, package_name):
         Package with numpy-like operations
 
     module : python module
-        module with "CPT" global attribute that stores
+        module with "ARRPKG" global attribute that stores
         the chosen compute package
 
     '''
     import importlib
 
     try:
-        assert hasattr(module, "CPT")
-        module.CPT = importlib.import_module(package_name)
+        assert hasattr(module, "ARRPKG")
+        module.ARRPKG = importlib.import_module(package_name)
 
     except Exception as e:
         # If want to fall back to default
         #default = 'numpy'
-        #CPT = importlib.import_module(default)
+        #ARRPKG = importlib.import_module(default)
         raise e
 
 
