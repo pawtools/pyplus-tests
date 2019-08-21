@@ -1,7 +1,8 @@
 
 import os
 import sys
-import pcca_standalone_koopy
+
+import src
 
 
 # If no args given, defaults:
@@ -20,9 +21,9 @@ if __name__ == "__main__":
         assert os.path.exists(input_transition_matrix)
         assert n_macrostates.find('.') < 0
 
-    pcca_standalone_koopy.set_compute_package(compute_package)
+    src.koopy_tools.set_compute_package(src.pcca, compute_package)
 
     T = pcca_standalone_koopy.CPT.load(input_transition_matrix)
     N = int(n_macrostates)
 
-    pcca_standalone_koopy.PCCA(T, N)
+    src.PCCA(T, N)
