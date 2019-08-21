@@ -75,6 +75,7 @@ def get_logger(logname, loglevel='info', logfile=True):
         logfilename = logname + '.log'
         if logfilename.startswith("__main__"):
             logfilename = "main." + logfilename
+        logfilename = "logs/%s" % logfilename
         fh = logging.FileHandler(logfilename)
         fh.setLevel(_loglevel)
         fh.setFormatter(formatter)
