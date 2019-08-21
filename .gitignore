@@ -1,6 +1,8 @@
 
+# Logs anywhere
 **/*log
-
+# Anything in logs dir (could be processed data, etc)
+logs/*
 
 # Swap files
 **/*swp
