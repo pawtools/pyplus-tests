@@ -1,6 +1,39 @@
 
 
+def set_compute_package(module, package_name):
+    '''Set the package used for calculations
+    before any actual work is run. The package must
+    provide algebraic operations with functions
+    having same name as in numpy.
+
+    Parameters
+    ----------
+    package_name : 'numpy','cupy', or ??
+        Package with numpy-like operations
+
+    module : python module
+        module with "CPT" global attribute that stores
+        the chosen compute package
+
+    '''
+    import importlib
+
+    try:
+        assert hasattr(module, "CPT")
+        module.CPT = importlib.import_module(package_name)
+
+    except Exception as e:
+        # If want to fall back to default
+        #default = 'numpy'
+        #CPT = importlib.import_module(default)
+        raise e
+
+
 def get_logger(logname, loglevel='info', logfile=True):
+    '''Logger with nice formatting to inspect
+    control flow and residence in targeted
+    regions of a code.
+    '''
 
     import logging
 

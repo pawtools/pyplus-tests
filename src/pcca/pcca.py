@@ -4,39 +4,15 @@ from scipy.sparse import issparse
 import math
 from six.moves import range
 
-
-from koopy_tools import get_logger
-
+from ..koopy_tools import get_logger
 logger = get_logger(__name__)
-
 # TODO log input data dimensions
 
+__all__ = ["PCCA"]
 
 global CPT
 CPT = None
 
-def set_compute_package(package_name):
-    '''This function must be used to set the
-    package used for calculations before any
-    actual work is run. The package must
-    provide algebraic operations with functions
-    having same name as in numpy.
-
-    Parameters
-    ----------
-    'numpy','cupy', or ??
-
-    '''
-    import importlib
-
-    try:
-        CPT = importlib.import_module(package_name)
-
-    except Exception as e:
-        # If want to fall back to default
-        #default = 'numpy'
-        #CPT = importlib.import_module(default)
-        raise e
 
 
 def _pcca_connected_isa(evec, n_clusters):
